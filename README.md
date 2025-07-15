@@ -1,8 +1,4 @@
-Thanks! Based on your clarification, here's an updated **README.md** that reflects the correct features:
 
----
-
-````markdown
 # 🩺 Health & Medical Blog App
 
 A full-stack MERN (MongoDB, Express, React, Node.js) application where users of all roles — patients, doctors, nurses, and admins — can write, read, like, and comment on health and medical blogs. Built for open discussion and health education sharing.
@@ -147,9 +143,4 @@ README.md
 
 This project is licensed under the MIT License.
 
-```
 
----
-
-Let me know if you'd like me to turn this into a downloadable `README.md` or include badges (e.g. build, license, tech stack).
-```
