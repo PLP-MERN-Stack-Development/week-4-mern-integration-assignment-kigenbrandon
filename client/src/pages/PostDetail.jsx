@@ -147,15 +147,17 @@ const PostDetail = () => {
 
   const canEdit =
     user &&
-    post?.author &&
-    (user._id === post.author._id || user.role === 'admin')
+    post?.data?.author &&
+    (user._id === post?.data?.author._id || user.role === 'admin')
+
+  console.log(post)
 
   return (
     <>
       {post.title && (
         <Helmet>
           <title>{post.title}</title>
-          <meta name="description" content={post.excerpt || ''} />
+          <meta name="description" content={post?.data?.excerpt || ''} />
         </Helmet>
       )}
 
@@ -169,7 +171,7 @@ const PostDetail = () => {
         </div>
 
         {/* Medical Disclaimer */}
-        {post.medicalDisclaimer && (
+        {post?.data?.medicalDisclaimer && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
             <div className="flex items-start">
               <AlertTriangle className="h-5 w-5 text-yellow-600 mr-3" />
@@ -186,7 +188,7 @@ const PostDetail = () => {
         {/* Header */}
         <header className="mb-8">
           {/* Categories */}
-          {post.categories?.length > 0 && (
+          {post?.data?.categories?.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-4">
               {post.categories.map((category) => (
                 <span
@@ -207,31 +209,31 @@ const PostDetail = () => {
             <div className="flex items-center gap-2">
               <img
                 src={
-                  post?.author?.avatar?.trim()
-                    ? post.author.avatar
-                    : `https://ui-avatars.com/api/?name=${post?.author?.username || 'User'}&background=3b82f6&color=fff`
+                  post?.data?.author?.avatar?.trim()
+                    ? post?.data?.author.avatar
+                    : `https://ui-avatars.com/api/?name=${post?.data?.author?.username || 'User'}&background=3b82f6&color=fff`
                 }
                 alt={post?.author?.username || 'User'}
                 className="h-8 w-8 rounded-full"
               />
-              <span className="font-medium text-gray-900">{post?.author?.username}</span>
+              <span className="font-medium text-gray-900">{post?.data?.author?.username}</span>
             </div>
 
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
               {post?.publishedAt && (
-                <span>{formatDistanceToNow(new Date(post.publishedAt), { addSuffix: true })}</span>
+                <span>{formatDistanceToNow(new Date(post?.data?.publishedAt), { addSuffix: true })}</span>
               )}
             </div>
 
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              <span>{post.readingTime} min read</span>
+              <span>{post?.data?.readingTime} min read</span>
             </div>
 
             <div className="flex items-center gap-1">
               <Eye className="h-4 w-4" />
-              <span>{post.views} views</span>
+              <span>{post?.data?.views} views</span>
             </div>
           </div>
 
@@ -267,7 +269,7 @@ const PostDetail = () => {
             {canEdit && (
               <div className="flex items-center gap-2">
                 <Link
-                  to={`/edit-post/${post._id}`}
+                  to={`/edit-post/${post?.data?._id}`}
                   className="flex items-center gap-2 px-3 py-2 rounded-md bg-blue-50 text-blue-600 hover:bg-blue-100"
                 >
                   <Edit3 className="h-4 w-4" />
@@ -286,7 +288,7 @@ const PostDetail = () => {
         </header>
 
         {/* Featured Image */}
-        {post.featuredImage && (
+        {post?.data?.featuredImage && (
           <div className="mb-8">
             <img
               src={post.featuredImage}
@@ -298,15 +300,15 @@ const PostDetail = () => {
 
         {/* Content */}
         <div className="prose prose-lg max-w-none mb-12">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div dangerouslySetInnerHTML={{ __html: post?.data?.content }} />
         </div>
 
         {/* Tags */}
-        {post.tags?.length > 0 && (
+        {post?.data?.tags?.length > 0 && (
           <div className="mb-8">
             <h3 className="text-sm font-medium text-gray-900 mb-3">Tags:</h3>
             <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag, index) => (
+              {post?.data?.tags.map((tag, index) => (
                 <span
                   key={index}
                   className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
